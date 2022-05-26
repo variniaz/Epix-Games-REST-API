@@ -42,6 +42,7 @@ module.exports = {
         ...req.body,
         password: encryptedPassword,
         role: "user",
+        login_type: "basic",
       });
 
       return res.status(201).json({
@@ -50,12 +51,12 @@ module.exports = {
         data: newUser,
       });
     } catch (err) {
-        return res.status(500).json({
-          status: false,
-          message: err.message,
-          data: null,
-        });
-       }
+      return res.status(500).json({
+        status: false,
+        message: err.message,
+        data: null,
+      });
+    }
   },
 
   updateAvatar: async (req, res) => {

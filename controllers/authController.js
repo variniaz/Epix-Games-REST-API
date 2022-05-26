@@ -10,7 +10,7 @@ const {
   OAUTH_CLIENT_SECRET,
   SERVER_ROOT_URI,
   JWT_SECRET_KEY,
-  SERVER_LOGIN_ENDPOINT
+  SERVER_LOGIN_ENDPOINT,
 } = process.env;
 
 const oauth2Client = new google.auth.OAuth2(
@@ -107,6 +107,7 @@ module.exports = {
       }
 
       const data = {
+        login_type: "basic",
         id: user.id,
         f_name: user.f_name,
         l_name: user.l_name,
@@ -161,15 +162,20 @@ module.exports = {
       await setCredentials(code);
 
       const { data } = await getUserInfo();
+      const emailGoogle = data.email;
+      const { email } = req.body;
+      let user = await User.findOne({ where: { email: emailGoogle } });
 
-      const user = {
-        login_type: "google-oauth2",
-        id: data.id,
-        name: data.name,
-        email: data.email,
-      };
+      if (!user) {
+        user = await User.create({
+          login_type: "google-oauth2",
+          id: data.id,
+          name: data.name,
+          email: data.email,
+        });
+      }
 
-      const token = jwt.sign(user, JWT_SECRET_KEY);
+      const token = jwt.sign(user.toJSON(), JWT_SECRET_KEY);
 
       res.status(200).json({
         status: true,

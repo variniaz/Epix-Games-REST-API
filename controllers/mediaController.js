@@ -22,6 +22,7 @@ module.exports = {
         message: err.message,
         data: null,
       });
+      // console.log(err)
     }
   },
 
