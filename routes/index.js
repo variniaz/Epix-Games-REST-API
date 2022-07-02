@@ -47,9 +47,10 @@ router.get("/reset-password/:userId", async (req, res) => {
   }
 });
 
-//api upload
+
+//upload media
 router.post(
-  "/api/upload/images",
+  "/upload/images",
   login,
   storage.uploadImage.single("images"),
   media.createImage
@@ -62,8 +63,9 @@ router.post(
   media.createVideo
 );
 router.post(
-  "/api/upload/files",
+  "/upload/files",
   login,
+  admin,
   storage.uploadFiles.single("files"),
   media.createFile
 );
@@ -85,5 +87,18 @@ router.get("/api/auth/who-am-i", middleware.login, auth.whoami);
 router.get("/api/auth/google", auth.googleOAuth);
 router.post("/api/auth/reset-password/:userId", resetPassword.reset);
 router.post("/api/auth/forgot-password", user.forgotPassword);
+router.put("/user/update-avatar", login, user.updateAvatar);
+
+//history
+router.post("/history", login, history.createHistory);
+router.get("/history/:id", login, history.getHistory);
+router.put("/history/:id", login, admin, history.updateHistory);
+router.delete("/history/:id", login, admin, history.deleteHistory);
+
+//auth
+router.post("/auth/login", auth.login);
+router.get("/auth/who-am-i", middleware.login, auth.whoami);
+router.get("/auth/google", auth.googleOAuth);
+
 
 module.exports = router;
