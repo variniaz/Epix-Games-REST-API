@@ -1,0 +1,59 @@
+body {
+    font-family: sans-serif;
+    color:white
+}
+
+.container {
+    background-image: url(./stylish-hexagonal-line-pattern-background_1017-19742.webp);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-wrap {
+    background-color: rgba(0, 0, 0, 0.452);
+    height: 100%;
+    width: 30%;
+    min-width: 420px;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+.form {
+    margin: 50px 25px;
+}
+
+input, .loginButton {
+    display: block;
+    box-sizing: border-box;
+    line-height: 30px;
+    width: 100%;
+    outline: none;
+    height: 60px;
+    text-align: center;
+}
+
+input[type=submit], input[type=button]{
+    background-color: rgb(82, 15, 15);
+    color: white;
+}
+
+.loginButton{
+
+background-color: rgb(59, 59, 59);
+}
+
+.loginButton a{
+    vertical-align: middle;
+    align-items: center;
+    text-decoration: none;
+    background-color: rgb(59, 59, 59);
+    color: white;
+    text-align: center; line-height: 60px;
+}
+
+.question {
+    text-align: center;
+}
